@@ -23,8 +23,7 @@ contract MappingStructExample {
         balanceReceived[msg.sender].totalBalance += msg.value;
         Payment memory payment = Payment(msg.value, block.timestamp); // "now" is deprecated. Use "block.timestamp" instead.
         // Do not use "new" for structs
-        // mapping (uint => Payment) memory payments2;
-
+        
         balanceReceived[msg.sender].payments[
             balanceReceived[msg.sender].numPayments
         ] = payment;
