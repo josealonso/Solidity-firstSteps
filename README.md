@@ -26,3 +26,26 @@ Variable initialization
 A public variable automatically creates a getter function in solidity
 
 
+## Mappings
+
+- All values are initialized by default.
+- Mappings don't have a "length".
+- Iterable mappings can be implemented using libraries.
+
+## Structs
+
+- Syntax similar to structs in C language.
+- Allow to define your own data type.
+- For gas cunsumption ---> It's better to define structs than objects.
+- Mapping and structs are a powerful combination.
+
+## Arrays
+
+- Fixed or dynamic size.
+- More intuitive (length, push), but mappings are more used because of the gas consumption.
+
+## Enums
+
+- Will be integers internally.
+- Up to 256 values ----> uint8 is used
+- More than 256 values ----> uint16 is used
