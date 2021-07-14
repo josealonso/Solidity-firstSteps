@@ -49,3 +49,7 @@ A public variable automatically creates a getter function in solidity
 - Will be integers internally.
 - Up to 256 values ----> uint8 is used
 - More than 256 values ----> uint16 is used
+
+## Re-Entrancy and Checks-Effects-Interaction Pattern
+
+As a rule of thumb: You interact with outside addresses last, no matter what. Unless you have a trusted source. So, first set your Variables to the state you want, as if someone could call back to the Smart Contract before you can execute the next line after .transfer(...). Read more about this here: https://fravoll.github.io/solidity-patterns/checks_effects_interactions.html
