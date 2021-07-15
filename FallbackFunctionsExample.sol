@@ -9,6 +9,18 @@ pragma solidity ^0.8.3;
 contract FallbackFunctionsExample {
     mapping(address => uint) public balanceReceived;
 
+    address payable public owner;
+
+    // The constructor is executed only during deployment. There is no way to execute the constructor code afterwards.
+    constructor() {
+        owner = payable(msg.sender);
+    }
+
+    function destroySmartContract() public {
+        require(msg.sender == owner, "You are not the owner");
+        selfdestruct(owner);
+    }
+
     function receiveMoney() public payable {
         assert(balanceReceived[msg.sender] + msg.value >= balanceReceived[msg.sender]);
         balanceReceived[msg.sender] += msg.value;
