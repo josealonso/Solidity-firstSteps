@@ -1,19 +1,27 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.3;
 
-// Prior Solidity 0.6 the fallback function was simply an anonymous function that looked like this:
-// function () external { }
-// It's now two different functions: receive() to receive money and fallback() to just interact with 
-// the Smart Contract without receiving Ether. 
+// Modifying state variables implies sending a transaction.
+// Reading values, on the other hand, is virtually free and doesn't require mining.
+// There are two types of reading functions:
+//     view: Accessing state variables
+//     pure: Not accessing state variables
 
 contract FallbackFunctionsExample {
-    mapping(address => uint) public balanceReceived;
+    mapping(address => uint256) public balanceReceived;
 
-    address payable public owner;
+    address payable owner; // Thi is private now
 
-    // The constructor is executed only during deployment. There is no way to execute the constructor code afterwards.
     constructor() {
         owner = payable(msg.sender);
+    }
+
+    function getOwner() public view returns (address) {
+        return owner;
+    }
+
+    function convertWeiToEth(uint256 _amount) public pure returns (uint) {
+        return _amount / 1 ether;
     }
 
     function destroySmartContract() public {
@@ -22,13 +30,18 @@ contract FallbackFunctionsExample {
     }
 
     function receiveMoney() public payable {
-        assert(balanceReceived[msg.sender] + msg.value >= balanceReceived[msg.sender]);
+        assert(
+            balanceReceived[msg.sender] + msg.value >=
+                balanceReceived[msg.sender]
+        );
         balanceReceived[msg.sender] += msg.value;
     }
 
-    function withdrawMoney(address payable _to, uint _amount) public {
+    function withdrawMoney(address payable _to, uint256 _amount) public {
         require(_amount <= balanceReceived[msg.sender], "Not enough funds");
-        assert(balanceReceived[msg.sender] >= balanceReceived[msg.sender] - _amount);
+        assert(
+            balanceReceived[msg.sender] >= balanceReceived[msg.sender] - _amount
+        );
         balanceReceived[msg.sender] -= _amount;
         _to.transfer(_amount);
     }
@@ -36,5 +49,4 @@ contract FallbackFunctionsExample {
     receive() external payable {
         receiveMoney();
     }
-
 }
