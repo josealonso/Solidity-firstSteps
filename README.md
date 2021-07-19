@@ -53,3 +53,25 @@ A public variable automatically creates a getter function in solidity
 ## Re-Entrancy and Checks-Effects-Interaction Pattern
 
 As a rule of thumb: You interact with outside addresses last, no matter what. Unless you have a trusted source. So, first set your Variables to the state you want, as if someone could call back to the Smart Contract before you can execute the next line after .transfer(...). Read more about this here: https://fravoll.github.io/solidity-patterns/checks_effects_interactions.html
+
+
+## Exceptions 
+
+- Transactions are atomic operations <---> Errors revert the state.
+- There's no catching mechanism in Solidity.
+- Keywords: require, assert, revert. "throw" was used in old versions, removed in Solidity 0.4.10.
+require -------> validate user input. If it evaluates to false, it will throw an exception. 
+assert --------> validate internal states (invariants)
+revert --------> equivalent to require.
+
+
+## Events
+
+They admit up to three parameters.
+Three use cases:
+- Return values after a transaction is mined.
+- Trigger
+- Storage means, if data is not needed by the smart contract.
+
+- Events are inheritable members.
+- Events are cheap.
