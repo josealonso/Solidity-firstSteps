@@ -75,3 +75,11 @@ Three use cases:
 
 - Events are inheritable members.
 - Events are cheap.
+
+
+## ABI array
+
+- It's a JSON file, containing all the functions, parameters and return values of the contact.
+- The EVM codes result from encoding all the values in the last point. They are similar to assembly language codes.
+- Gas costs are determined by the operational complexity.
+Gas is detached from Ether.
