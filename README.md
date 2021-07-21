@@ -83,3 +83,27 @@ Three use cases:
 - The EVM codes result from encoding all the values in the last point. They are similar to assembly language codes.
 - Gas costs are determined by the operational complexity.
 Gas is detached from Ether.
+
+
+## Solidity 0.6.0 Breaking Changes
+
+- Virtual and override are new keywords.
+If a function is going to be overriden ---> Mark it with `virtual`.
+When defining a function already existing in other contract ---> Mark it with `override`.
+- In order to prevent collisions by gigantic storage arrays, `length` cannot be used to modify the length of an array.
+- State variable shadowing is now disallowed.
+
+This won't compile if the private keyword is removed:
+```
+contract A {
+    uint private x = 123;
+}
+
+contract B is A {
+    uint x = 234;
+}
+
+```
+
+- Fallback and Receive are separated functions.
+- A try/catch statement 
