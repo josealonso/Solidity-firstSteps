@@ -48,6 +48,10 @@ contract SimpleWallet is Allowance {
         _to.transfer(_amount);
     }
 
+    function renounceOwnership() public pure override {
+        revert("Can't renounce ownership here");
+    }
+    
     receive() external payable {  // deposit money into the SC
         emit MoneyReceived(msg.sender, msg.value);
     }
