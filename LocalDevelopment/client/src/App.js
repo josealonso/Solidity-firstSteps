@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import ItemManagerContract from "./contracts/ItemManager.json";
-import ItemContract from "./contracts/Item.json";
+import ItemManager from "./contracts/ItemManager.json";
+import Item from "./contracts/Item.json";
 import getWeb3 from "./getWeb3";
-
 import "./App.css";
 
 class App extends Component {
-  state = { loaded: false, cost: 0, itemName: "example_1" };
-  // state = { storageValue: 0, web3: null, accounts: null, contract: null };
-
+  state = { loaded: false, cost: 0, itemName: "exampleItem1" };
+  
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
@@ -18,21 +16,20 @@ class App extends Component {
       this.accounts = await this.web3.eth.getAccounts();
 
       // Get the contract instance.
-      this.networkId = await this.web3.eth.net.getId();
+      const networkId = await this.web3.eth.net.getId();
 
       this.itemManager = new this.web3.eth.Contract(
-        ItemManagerContract.abi,
-        ItemManagerContract.networks[this.networkId] && ItemManagerContract.networks[this.networkId].address,
+        ItemManager.abi,
+        ItemManager.networks[networkId] && ItemManager.networks[networkId].address,
       );
 
       this.item = new this.web3.eth.Contract(
-        ItemContract.abi,
-        ItemContract.networks[this.networkId] && ItemContract.networks[this.networkId].address,
+        Item.abi,
+        Item.networks[networkId] && Item.networks[networkId].address,
       );
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
       this.setState({ loaded: true });
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -53,7 +50,7 @@ class App extends Component {
 
   handleSubmit = async () => {  // wait for the blockchain to come back with the results
     const { cost, itemName } = this.state;
-    await this.ItemManager.methods.createItem(itemName, cost).send(
+    await this.itemManager.methods.createItem(itemName, cost).send(
       { from: this.accounts[0] }
     );
   }
@@ -66,7 +63,7 @@ class App extends Component {
       <div className="App">
         <h1>Supply Chain Example</h1>
         <h2>Items</h2>
-        <h2>Add Items</h2>
+        <h2>Add Elements</h2>
         Cost in wei: <input type="text" name="cost" value={this.state.cost} onChange={this.handleInputChange} />
         Item Identifier: <input type="text" name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
         <button type="button" onClick={this.handleSubmit}>Create new Item</button>
