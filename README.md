@@ -107,3 +107,18 @@ contract B is A {
 
 - Fallback and Receive are separated functions.
 - A try/catch statement 
+
+## Browser-Smart Contract interaction
+
+Library used: **web3js** 
+An alternative is **etherjs**
+
+## Connect Metamask
+
+- It must be connected to **Localhost 8545**, which is the url used by truffle.
+- Metamask ----> Nonce is the number of transactions sent from a given address. It's incremented once per transaction. But we're starting the truffle development network, which is our Ethereum blockchain. This results in strange errors.  
+- Solution: go to advanced settings ---> Reset Account.
+- Solution to the "insufficient funds" message --->
+In the Terminal where Truffle Developer Console is running scroll to the private keys on top. Copy the private key and add it into MetaMask. 
+Click on "Import Account" and paste the private key on the text box. 
+Then your new Account should appear here with ~100 Ether in it.
