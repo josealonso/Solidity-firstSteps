@@ -28,6 +28,9 @@ class App extends Component {
         Item.networks[networkId] && Item.networks[networkId].address,
       );
 
+      // Set web3, accounts, and contracts to the state, and then proceed with an
+      // example of interacting with the contract's methods
+      this.listenToPaymentEvent();
       this.setState({ loaded: true });
 
     } catch (error) {
@@ -38,6 +41,15 @@ class App extends Component {
       console.error(error);
     }
   };
+
+  listenToPaymentEvent = () => {
+    let self = this;
+    this.itemManager.events.SupplyChainStep().on("data", async function(evt) {
+      console.log(evt);
+      let itemObj = await self.itemManager.methods.items(evt.returnValues._itemIndex).call();
+      alert("Item " + itemObj._identifier + " was paid, deliver it now");
+    });
+  }
 
   handleInputChange = (event) => {
     const target = event.target;
