@@ -50,9 +50,11 @@ class App extends Component {
 
   handleSubmit = async () => {  // wait for the blockchain to come back with the results
     const { cost, itemName } = this.state;
-    await this.itemManager.methods.createItem(itemName, cost).send(
+    let result = await this.itemManager.methods.createItem(itemName, cost).send(
       { from: this.accounts[0] }
     );
+    console.log('Resultado: ' + result);
+    alert('Send ' + cost + ' Wei to ' + result.events.SupplyChainStep.returnValues._itemAddress);
   }
 
   render() {
