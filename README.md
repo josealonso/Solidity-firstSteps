@@ -122,3 +122,11 @@ An alternative is **etherjs**
 In the Terminal where Truffle Developer Console is running scroll to the private keys on top. Copy the private key and add it into MetaMask. 
 Click on "Import Account" and paste the private key on the text box. 
 Then your new Account should appear here with ~100 Ether in it.
+
+# Assets Tokenization Project
+
+```
+npm install -g truffle
+truffle unbox react
+```
+
