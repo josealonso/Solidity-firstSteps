@@ -128,5 +128,24 @@ Then your new Account should appear here with ~100 Ether in it.
 ```
 npm install -g truffle
 truffle unbox react
+
+npm install --save @openzeppelin/contracts
+```
+DEPLOYMENT
+```
+truffle developer
+truffle(develop)> migrate
 ```
 
+## Testing
+
+```
+npm i --save chai chai-bn chai-as-promised
+truffle test
+```
+  or
+
+```
+truffle developer
+truffle(develop)> test
+```

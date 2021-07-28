@@ -1,5 +1,7 @@
-const Token = artifacts.require("MyToken");
 // Let's add unit tests using Mocha, Chai, Chai-Expect and Chai-as-Promised
+
+const Token = artifacts.require("MyToken");
+
 var chai = require("chai");
 const BN = web3.utils.BN;
 const chaiBN = require("chai-bn")(BN);
@@ -39,5 +41,5 @@ contract("Token Test", async accounts => {
         await expect(instance.balanceOf(initialHolder)).to.eventually.be.a.bignumber.equal(balanceOfAccount);
   
       });
-      
+
 });
