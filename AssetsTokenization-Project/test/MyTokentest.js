@@ -1,5 +1,6 @@
 // Let's add unit tests using Mocha, Chai, Chai-Expect and Chai-as-Promised
 
+require('dotenv').config({path: '../.env'});
 const Token = artifacts.require("MyToken");
 
 var chai = require("chai");
@@ -16,7 +17,7 @@ contract("Token Test", async accounts => {
     const [initialHolder, recipient, anotherAccount] = accounts;
 
     beforeEach(async () => {
-        this.myToken = await Token.new(1000);
+        this.myToken = await Token.new(process.env.INITIAL_TOKENS);
     });
 
     it("all tokens should be in my account", async () => {
