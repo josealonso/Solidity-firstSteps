@@ -58,7 +58,8 @@ class App extends Component {
   }
 
   handleKycWhitelisting = async () => {
-    await this.kycInstance.methods.setKycCompleted(this.state.kycAddress).send({ from: this.accounts[0] });
+    const { kycAddress } = this.state;
+    await this.kycInstance.methods.setKycCompleted(kycAddress).send({ from: this.accounts[0] });
     alert("KYC for " + this.state.kycAddress + " is completed");
   }
 

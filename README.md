@@ -123,15 +123,29 @@ In the Terminal where Truffle Developer Console is running scroll to the private
 Click on "Import Account" and paste the private key on the text box. 
 Then your new Account should appear here with ~100 Ether in it.
 
+When running Ganache and truffle, we can send 2 ethers from the first Ganache account to the Metamask account doing this:
+
+```
+truffle console
+truffle(ganache)> web3.eth.sendTransaction({to:"0x45F4b58eA3a216373DF8FD5D02Fc7B273efEeA97", from:accounts[0], value:web3.utils.toWei("2", "ether")});
+```
+
+## Use Truffle HDWallet Provider
+
+npm i --save @truffle/hdwallet-provider
+
 # Assets Tokenization Project
 
 ```
 npm install -g truffle
 truffle unbox react
 
-npm install --save @openzeppelin/contracts
+npm install --save @openzeppelin/contracts@v3.0.0 (Solidity 0.6.0)
+
 ```
+
 DEPLOYMENT
+
 ```
 truffle developer
 truffle(develop)> migrate
