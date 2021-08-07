@@ -117,7 +117,7 @@ An alternative is **etherjs**
 
 - It must be connected to **Localhost 8545**, which is the url used by truffle.
 - Metamask ----> Nonce is the number of transactions sent from a given address. It's incremented once per transaction. But we're starting the truffle development network, which is our Ethereum blockchain. This results in strange errors.  
-- Solution: go to advanced settings ---> Reset Account.
+- Solution: go to advanced settings ---> **Reset Account**
 - Solution to the "insufficient funds" message --->
 In the Terminal where Truffle Developer Console is running scroll to the private keys on top. Copy the private key and add it into MetaMask. 
 Click on "Import Account" and paste the private key on the text box. 
@@ -127,8 +127,29 @@ When running Ganache and truffle, we can send 2 ethers from the first Ganache ac
 
 ```
 truffle console
-truffle(ganache)> web3.eth.sendTransaction({to:"0x45F4b58eA3a216373DF8FD5D02Fc7B273efEeA97", from:accounts[0], value:web3.utils.toWei("2", "ether")});
+truffle(ganache)> web3.eth.sendTransaction({to:"PASTE_ACCOUNT_FROM_METAMASK", from:accounts[0], value:web3.utils.toWei("2", "ether")});
 ```
+
+## Use the KycContract using MetaMask
+
+We could use another account in MetaMask to whitelist it.
+
+- Copy one of your accounts in MetaMask (other than your account#1) to whitelist.
+- Paste this account into the account-field in your new HTML UI.
+- But before sending off the transaction, make sure you switch back to Account #1 (the account that created the smart contract from truffle migrate).
+- You should see a popup to confirm the transaction and then an alert box, that tells you that your account is now whitelisted.
+**IMPORTANT** This transaction will be confirmed only if the Metamask transaction history is reset.
+- Account #2 is now whitelisted. But how to purchase Tokens?
+
+## Buy Complu Tokens
+
+To actually purchase any tokens, we must first get some ether into the account. Every token has a price, so, let's first send Ether from Account #1 to Account #2 by using Metamask.
+Then simply send 1 Wei from your account. Initially, we set 1 Wei equals 1 Token, we might want to change that later on, but for testing it's okay. 
+1 Ether = 10^18 Wei, so 1 Wei = 0.000000000000000001 Ether. 
+In order to display the tokens within Metamask, we need to open MetaMask and add a custom Token to our UI.
+You need the Token-Address, not the TokenSaleAddress. You can either print the address to the UI or copy it directly from the json file in the client/contracts/MyToken.json file.
+Add in the Token-Address from the Token and the Symbol "CMP", then click next. You should see you token appear in MetaMask for your account.
+
 
 ## Use Truffle HDWallet Provider
 
