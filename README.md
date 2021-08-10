@@ -165,12 +165,35 @@ npm install --save @openzeppelin/contracts@v3.0.0 (Solidity 0.6.0)
 
 ```
 
-DEPLOYMENT
+## Setting up and deployment
+
+
+- Start the private blockchain
+
+```
+ganache-cli --networkId 1337 --chainId 1337
+```
+
+- Deploy the three smart contrats
 
 ```
 truffle developer
 truffle(develop)> migrate
 ```
+
+or
+
+```
+truffle migrate
+```
+
+- Deploy the React server
+
+```
+cd client
+npm run start
+```
+
 
 ## Testing
 
