@@ -157,6 +157,10 @@ npm i --save @truffle/hdwallet-provider
 
 # Assets Tokenization Project
 
+![image](https://user-images.githubusercontent.com/3770471/128864316-c2ae5c7f-a314-49bc-9d87-3bbe388c8ebb.png)
+
+
+
 ```
 npm install -g truffle
 truffle unbox react
