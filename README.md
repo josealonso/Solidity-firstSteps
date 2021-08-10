@@ -207,3 +207,26 @@ truffle test
 truffle developer
 truffle(develop)> test
 ```
+
+## Deployment in a public network
+
+Instead of the Ganache private blockchain node or a full node, like go_ethereum (geth), a Infura hosted blockchain node will be used.
+
+- Create a new Infura project.
+
+- Add the public networks to the truffle configuration file
+```
+ rinkeby_infura: {
+      provider: function() {
+        return new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/YOUR_INFURA_ID", MetaMaskAccountIndex)
+      },
+      network_id: 3
+    },
+```
+Similar lines for the other test networks.
+
+- Deployment command
+
+```
+truffle migrate --network rinkeby_infura
+```
